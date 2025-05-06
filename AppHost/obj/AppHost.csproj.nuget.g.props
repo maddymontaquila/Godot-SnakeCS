@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/Users/maddy/.nuget/packages/</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/Users/maddy/.nuget/packages/</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.13.0</NuGetToolVersion>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="/Users/maddy/.nuget/packages/" />
+  </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets/9.0.3/buildTransitive/net8.0/Microsoft.Extensions.Configuration.UserSecrets.props" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration.usersecrets/9.0.3/buildTransitive/net8.0/Microsoft.Extensions.Configuration.UserSecrets.props')" />
+    <Import Project="$(NuGetPackageRoot)aspire.hosting.apphost/9.3.0-preview.1.25208.10/build/Aspire.Hosting.AppHost.props" Condition="Exists('$(NuGetPackageRoot)aspire.hosting.apphost/9.3.0-preview.1.25208.10/build/Aspire.Hosting.AppHost.props')" />
+    <Import Project="$(NuGetPackageRoot)aspire.dashboard.sdk.osx-arm64/9.3.0-preview.1.25208.10/buildTransitive/Aspire.Dashboard.Sdk.osx-arm64.props" Condition="Exists('$(NuGetPackageRoot)aspire.dashboard.sdk.osx-arm64/9.3.0-preview.1.25208.10/buildTransitive/Aspire.Dashboard.Sdk.osx-arm64.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgGrpc_Tools Condition=" '$(PkgGrpc_Tools)' == '' ">/Users/maddy/.nuget/packages/grpc.tools/2.71.0</PkgGrpc_Tools>
+    <PkgAspire_Hosting_Orchestration_osx-arm64 Condition=" '$(PkgAspire_Hosting_Orchestration_osx-arm64)' == '' ">/Users/maddy/.nuget/packages/aspire.hosting.orchestration.osx-arm64/9.3.0-preview.1.25208.10</PkgAspire_Hosting_Orchestration_osx-arm64>
+    <PkgAspire_Dashboard_Sdk_osx-arm64 Condition=" '$(PkgAspire_Dashboard_Sdk_osx-arm64)' == '' ">/Users/maddy/.nuget/packages/aspire.dashboard.sdk.osx-arm64/9.3.0-preview.1.25208.10</PkgAspire_Dashboard_Sdk_osx-arm64>
+  </PropertyGroup>
+</Project>

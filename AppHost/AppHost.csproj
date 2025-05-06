@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.3.0-preview.1.25208.10" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>8c5e4155-efda-4c58-8cd2-42ec75f136f3</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.0-preview.1.25208.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../LeaderboardAPI/LeaderboardAPI.csproj" />
+  </ItemGroup>
+
+</Project>
