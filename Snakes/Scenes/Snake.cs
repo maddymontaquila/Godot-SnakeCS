@@ -40,12 +40,13 @@ public partial class Snake : Node2D
 		timer.Start();
 
 		 // Set up API client base address
-		_httpClient.BaseAddress = new Uri("http://localhost:5193");
+		_httpClient.BaseAddress = new Uri(System.Environment.GetEnvironmentVariable("services__leaderboard__https__0"));
 
 		// We connect to the SnakeBody's GameOver Signal using C# 
 		// Lambda expression works too.
 		_snakeBody.GameOver += OnGameOver;
 		_snakeBody.AppleEaten += OnAppleEaten;
+		
 	}
 
 	public override void _Process(double delta)
@@ -111,7 +112,8 @@ public partial class Snake : Node2D
 	public void NewApple(object src , ElapsedEventArgs e)
 	{
 		if(_apple is not null){
-			RemoveChild(_apple);
+			// Use CallDeferred to remove child from main thread instead of direct removal
+			CallDeferred("remove_child", _apple);
 		}
 		_apple = new Apple
 		{

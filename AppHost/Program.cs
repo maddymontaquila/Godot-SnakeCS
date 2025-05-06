@@ -1,9 +1,13 @@
+using Microsoft.VisualBasic;
 using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddGodot("../Snakes/Snakes.csproj", "snakes");
+var leaderboard = builder.AddProject<LeaderboardAPI>("leaderboard");
 
-builder.AddProject<LeaderboardAPI>("leaderboard");
+builder.AddGodot("../Snakes/Snakes.csproj", "snakes")
+    .WithReference(leaderboard);
+
+
 
 builder.Build().Run();

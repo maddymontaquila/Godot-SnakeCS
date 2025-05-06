@@ -4,6 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.AddServiceDefaults();
+
 // Add CORS services
 builder.Services.AddCors(options =>
 {
@@ -62,6 +64,8 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.MapDefaultEndpoints();
 
 app.Run();
 
