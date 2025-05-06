@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Lifecycle;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,11 +15,11 @@ public static class GodotExtensions
     /// Adds a Godot project to the application model.
     /// </summary>
     /// <param name="builder">The distributed application builder.</param>
-    /// <param name="projectPath">The path to the Godot project file (.csproj).</param>
+    /// <param name="projectPath">The path to the Godot project file (.godot).</param>
     /// <param name="name">The name of the resource.</param>
     /// <param name="args">Optional arguments to pass to the Godot executable.</param>
     /// <returns>A reference to the Godot project resource.</returns>
-    public static IResourceBuilder<GodotResource> AddGodot(
+    public static IResourceBuilder<ExecutableResource> AddGodot(
         this IDistributedApplicationBuilder builder, 
         string projectPath, 
         string? name = null,
@@ -28,33 +29,36 @@ public static class GodotExtensions
         var projectDirectory = Path.GetDirectoryName(projectPath) ?? ".";
         var godotPath = GetGodotExecutablePath();
         
-        // Create a plain resource for Godot with metadata
-        var resource = new GodotResource(name);
-        var project = builder.AddResource(resource)
-            .WithAnnotation(new EnvironmentCallbackAnnotation(
-                callback: envBuilder => 
-                {
-                    envBuilder["GODOT_PROJECT_PATH"] = projectPath;
-                    envBuilder["GODOT_PROJECT_DIR"] = projectDirectory;
-                }
-            ));
+        // Build the arguments list
+        var arguments = new List<string>
+        {
+            "--path",
+            projectDirectory,
+            "--verbose"
+        };
         
-        // Add a hook that runs before launch to build and run the project
+        // Add any custom args
+        arguments.AddRange(args);
+        
+        // Create a standard ExecutableResource (since custom ones don't seem to work well)
+        var godotResource = builder.AddExecutable(
+            name: name,
+            command: godotPath,
+            workingDirectory: projectDirectory,
+            args: arguments.ToArray());
+        
+        // Add a lifecycle hook to handle building before startup
         builder.Services.AddSingleton<IDistributedApplicationLifecycleHook>(sp => 
-            new GodotBuildHook(name, projectPath, projectDirectory, args, 
-                sp.GetService<ILogger<GodotBuildHook>>() ?? NullLogger<GodotBuildHook>.Instance));
+            new GodotBuildHook(
+                projectPath, 
+                projectDirectory,
+                sp.GetRequiredService<ILogger<GodotBuildHook>>()));
         
-        return project;
-    }
-    
-    // Custom resource type to hold Godot-specific information
-    public class GodotResource(string name) : Resource(name)
-    {
-        
+        return godotResource;
     }
     
     /// <summary>
-    /// Get the Godot executable path from the GODOT environment variable or fallback to default
+    /// Gets the Godot executable path based on the current platform.
     /// </summary>
     private static string GetGodotExecutablePath()
     {
@@ -82,21 +86,19 @@ public static class GodotExtensions
         throw new PlatformNotSupportedException("Current platform is not supported for Godot execution.");
     }
     
-    // Class to handle building and running Godot through lifecycle hooks
+    /// <summary>
+    /// Lifecycle hook to build the Godot project before launching
+    /// </summary>
     private class GodotBuildHook : IDistributedApplicationLifecycleHook
     {
-        private readonly string _name;
         private readonly string _projectPath;
         private readonly string _projectDirectory;
-        private readonly string[] _args;
         private readonly ILogger<GodotBuildHook> _logger;
         
-        public GodotBuildHook(string name, string projectPath, string projectDirectory, string[] args, ILogger<GodotBuildHook> logger)
+        public GodotBuildHook(string projectPath, string projectDirectory, ILogger<GodotBuildHook> logger)
         {
-            _name = name;
             _projectPath = projectPath;
             _projectDirectory = projectDirectory;
-            _args = args;
             _logger = logger;
         }
         
@@ -104,7 +106,7 @@ public static class GodotExtensions
         {
             _logger.LogInformation("Building Godot project: {ProjectPath}", _projectPath);
             
-            // First, build the .NET project
+            // Execute dotnet build on the project
             var buildProcess = new System.Diagnostics.Process
             {
                 StartInfo = new System.Diagnostics.ProcessStartInfo
@@ -119,70 +121,39 @@ public static class GodotExtensions
                 }
             };
             
+            buildProcess.OutputDataReceived += (sender, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    _logger.LogInformation("[Godot Build] {Data}", e.Data);
+                }
+            };
+            
+            buildProcess.ErrorDataReceived += (sender, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    _logger.LogError("[Godot Build] {Data}", e.Data);
+                }
+            };
+            
             buildProcess.Start();
+            buildProcess.BeginOutputReadLine();
+            buildProcess.BeginErrorReadLine();
             await buildProcess.WaitForExitAsync(cancellationToken);
             
             if (buildProcess.ExitCode != 0)
             {
                 _logger.LogError("Failed to build Godot project: {ProjectPath}", _projectPath);
-                var error = await buildProcess.StandardError.ReadToEndAsync(cancellationToken);
-                _logger.LogError("Build errors: {Error}", error);
                 return;
             }
             
             _logger.LogInformation("Successfully built Godot project: {ProjectPath}", _projectPath);
-            
-            // Now run Godot using the path from GODOT env var or default
-            var godotExecutable = GetGodotExecutablePath();
-            
-            // Prepare Godot arguments
-            var godotArgs = new List<string>
-            {
-                "--path",
-                _projectDirectory,
-            };
-            
-            // Add any custom args
-            godotArgs.AddRange(_args);
-            
-            _logger.LogInformation("Starting Godot project: {ProjectPath} in directory {Directory} using executable: {GodotPath}", 
-                _projectPath, _projectDirectory, godotExecutable);
-                
-            var process = new System.Diagnostics.Process
-            {
-                StartInfo = new System.Diagnostics.ProcessStartInfo
-                {
-                    FileName = godotExecutable,
-                    Arguments = String.Join(" ", godotArgs),
-                    UseShellExecute = false,
-                    CreateNoWindow = false,
-                    WorkingDirectory = _projectDirectory,
-                    
-                    // Set environment variables
-                    EnvironmentVariables = 
-                    {
-                        ["ASPNETCORE_ENVIRONMENT"] = "Development"
-                    }
-                }
-            };
-            
-            process.Start();
-            _logger.LogInformation("Godot project started: {ProjectPath}", _projectPath);
         }
         
         public Task AfterStartAsync(DistributedApplicationModel appModel, CancellationToken cancellationToken = default)
         {
             return Task.CompletedTask;
         }
-    }
-    
-    // Null logger implementation if logger service is not available
-    private class NullLogger<T> : ILogger<T>
-    {
-        public static readonly ILogger<T> Instance = new NullLogger<T>();
-        
-        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
-        public bool IsEnabled(LogLevel logLevel) => false;
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter) { }
     }
 }
