@@ -1,6 +1,3 @@
-using Microsoft.VisualBasic;
-using Projects;
-
 var builder = DistributedApplication.CreateBuilder(args);
 
 var leaderboard = builder.AddProject<LeaderboardAPI>("leaderboard");
