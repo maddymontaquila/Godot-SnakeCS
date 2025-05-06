@@ -1,3 +1,11 @@
+/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.csproj.AssemblyReference.cache
+/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.GeneratedMSBuildEditorConfig.editorconfig
+/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.AssemblyInfoInputs.cache
+/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.AssemblyInfo.cs
+/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.csproj.CoreCompileInputs.cache
+/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/Aspire/references/LeaderboardAPI.ProjectMetadata.g.cs
+/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/Aspire/references/_AppHost.ProjectMetadata.g.cs
+/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.sourcelink.json
 /Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/AppHost
 /Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/AppHost.deps.json
 /Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/AppHost.runtimeconfig.json
@@ -123,14 +131,6 @@
 /Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/zh-Hant/StreamJsonRpc.resources.dll
 /Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/runtimes/win/lib/net9.0/System.Diagnostics.EventLog.Messages.dll
 /Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/runtimes/win/lib/net9.0/System.Diagnostics.EventLog.dll
-/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.csproj.AssemblyReference.cache
-/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.GeneratedMSBuildEditorConfig.editorconfig
-/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.AssemblyInfoInputs.cache
-/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.AssemblyInfo.cs
-/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.csproj.CoreCompileInputs.cache
-/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/Aspire/references/LeaderboardAPI.ProjectMetadata.g.cs
-/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/Aspire/references/_AppHost.ProjectMetadata.g.cs
-/Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.sourcelink.json
 /Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.csproj.Up2Date
 /Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.dll
 /Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/refint/AppHost.dll
