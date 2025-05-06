@@ -74,3 +74,8 @@
 /Users/maddy/source/Godot-SnakeCS/LeaderboardAPI/bin/Debug/net9.0/System.IO.Pipelines.dll
 /Users/maddy/source/Godot-SnakeCS/LeaderboardAPI/bin/Debug/net9.0/ServiceDefaults.dll
 /Users/maddy/source/Godot-SnakeCS/LeaderboardAPI/bin/Debug/net9.0/ServiceDefaults.pdb
+/Users/maddy/source/Godot-SnakeCS/LeaderboardAPI/bin/Debug/net9.0/Aspire.Npgsql.dll
+/Users/maddy/source/Godot-SnakeCS/LeaderboardAPI/bin/Debug/net9.0/HealthChecks.NpgSql.dll
+/Users/maddy/source/Godot-SnakeCS/LeaderboardAPI/bin/Debug/net9.0/Npgsql.dll
+/Users/maddy/source/Godot-SnakeCS/LeaderboardAPI/bin/Debug/net9.0/Npgsql.DependencyInjection.dll
+/Users/maddy/source/Godot-SnakeCS/LeaderboardAPI/bin/Debug/net9.0/Npgsql.OpenTelemetry.dll

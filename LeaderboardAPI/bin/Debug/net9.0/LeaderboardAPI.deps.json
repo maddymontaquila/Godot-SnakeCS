@@ -8,11 +8,46 @@
     ".NETCoreApp,Version=v9.0": {
       "LeaderboardAPI/1.0.0": {
         "dependencies": {
+          "Aspire.Npgsql": "9.2.1",
           "Microsoft.AspNetCore.OpenApi": "9.0.2",
           "ServiceDefaults": "1.0.0"
         },
         "runtime": {
           "LeaderboardAPI.dll": {}
+        }
+      },
+      "Aspire.Npgsql/9.2.1": {
+        "dependencies": {
+          "AspNetCore.HealthChecks.NpgSql": "9.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Configuration.Binder": "9.0.3",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.15",
+          "Microsoft.Extensions.Hosting.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Options": "9.0.3",
+          "Microsoft.Extensions.Primitives": "9.0.3",
+          "Npgsql.DependencyInjection": "9.0.3",
+          "Npgsql.OpenTelemetry": "9.0.2",
+          "OpenTelemetry.Extensions.Hosting": "1.11.2"
+        },
+        "runtime": {
+          "lib/net8.0/Aspire.Npgsql.dll": {
+            "assemblyVersion": "9.2.1.0",
+            "fileVersion": "9.200.125.22201"
+          }
+        }
+      },
+      "AspNetCore.HealthChecks.NpgSql/9.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.15",
+          "Npgsql": "9.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/HealthChecks.NpgSql.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
         }
       },
       "Microsoft.AspNetCore.OpenApi/9.0.2": {
@@ -151,6 +186,15 @@
           }
         }
       },
+      "Microsoft.Extensions.Diagnostics.HealthChecks/8.0.15": {
+        "dependencies": {
+          "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions": "8.0.15",
+          "Microsoft.Extensions.Hosting.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Options": "9.0.3"
+        }
+      },
+      "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions/8.0.15": {},
       "Microsoft.Extensions.Features/8.0.14": {},
       "Microsoft.Extensions.FileProviders.Abstractions/9.0.3": {
         "dependencies": {
@@ -397,6 +441,41 @@
           }
         }
       },
+      "Npgsql/9.0.3": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/Npgsql.dll": {
+            "assemblyVersion": "9.0.3.0",
+            "fileVersion": "9.0.3.0"
+          }
+        }
+      },
+      "Npgsql.DependencyInjection/9.0.3": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.3",
+          "Npgsql": "9.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/Npgsql.DependencyInjection.dll": {
+            "assemblyVersion": "9.0.3.0",
+            "fileVersion": "9.0.3.0"
+          }
+        }
+      },
+      "Npgsql.OpenTelemetry/9.0.2": {
+        "dependencies": {
+          "Npgsql": "9.0.3",
+          "OpenTelemetry.Api": "1.11.2"
+        },
+        "runtime": {
+          "lib/net6.0/Npgsql.OpenTelemetry.dll": {
+            "assemblyVersion": "9.0.2.0",
+            "fileVersion": "9.0.2.0"
+          }
+        }
+      },
       "OpenTelemetry/1.11.2": {
         "dependencies": {
           "Microsoft.Extensions.Diagnostics.Abstractions": "9.0.3",
@@ -559,6 +638,20 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Aspire.Npgsql/9.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mvrnYazE5mgiOuFtTZ2jRRpLHC2gp3p+eLjlni/Q0zvJDjQSmRnTae6JHe4nMGJ000LNHsrrs4WMBdMUdmvtCA==",
+      "path": "aspire.npgsql/9.2.1",
+      "hashPath": "aspire.npgsql.9.2.1.nupkg.sha512"
+    },
+    "AspNetCore.HealthChecks.NpgSql/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-npc58/AD5zuVxERdhCl2Kb7WnL37mwX42SJcXIwvmEig0/dugOLg3SIwtfvvh3TnvTwR/sk5LYNkkPaBdks61A==",
+      "path": "aspnetcore.healthchecks.npgsql/9.0.0",
+      "hashPath": "aspnetcore.healthchecks.npgsql.9.0.0.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.OpenApi/9.0.2": {
       "type": "package",
       "serviceable": true,
@@ -642,6 +735,20 @@
       "sha512": "sha512-rQkufpuGUHgPb7QWzjTj29eIjcMfUTDmBVMlybp4OWNtaDGWAkmvZuf1WRZfFKvPnPl1TAKqdYzOen45KR6gkw==",
       "path": "microsoft.extensions.diagnostics.exceptionsummarization/9.3.0",
       "hashPath": "microsoft.extensions.diagnostics.exceptionsummarization.9.3.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Diagnostics.HealthChecks/8.0.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+Z6pfO5PnDa9/QCAB8DhmLtmjh0Z4A3i/5X5k3TBqKjCD4o88oUoyI240ras/LDsrFcjYXVLDsBZbuoN9ihjuw==",
+      "path": "microsoft.extensions.diagnostics.healthchecks/8.0.15",
+      "hashPath": "microsoft.extensions.diagnostics.healthchecks.8.0.15.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions/8.0.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FkN4TMmKdpvuwhBlt7rt7op1RyyHvS/obnHAIOes0+cYU5uBiz7ciYpGkLZmbKGvRm9tUEfB9HpEg27kIwvXEQ==",
+      "path": "microsoft.extensions.diagnostics.healthchecks.abstractions/8.0.15",
+      "hashPath": "microsoft.extensions.diagnostics.healthchecks.abstractions.8.0.15.nupkg.sha512"
     },
     "Microsoft.Extensions.Features/8.0.14": {
       "type": "package",
@@ -775,6 +882,27 @@
       "sha512": "sha512-Le+kehlmrlQfuDFUt1zZ2dVwrhFQtKREdKBo+rexOwaCoYP0/qpgT9tLxCsZjsgR5Itk1UKPcbgO+FyaNid/bA==",
       "path": "microsoft.openapi/1.6.17",
       "hashPath": "microsoft.openapi.1.6.17.nupkg.sha512"
+    },
+    "Npgsql/9.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tPvY61CxOAWxNsKLEBg+oR646X4Bc8UmyQ/tJszL/7mEmIXQnnBhVJZrZEEUv0Bstu0mEsHZD5At3EO8zQRAYw==",
+      "path": "npgsql/9.0.3",
+      "hashPath": "npgsql.9.0.3.nupkg.sha512"
+    },
+    "Npgsql.DependencyInjection/9.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-McQ/xmBW9txjNzPyVKdmyx5bNVKDyc6ryz+cBOnLKxFH8zg9XAKMFvyNNmhzNjJbzLq8Rx+FFq/CeHjVT3s35w==",
+      "path": "npgsql.dependencyinjection/9.0.3",
+      "hashPath": "npgsql.dependencyinjection.9.0.3.nupkg.sha512"
+    },
+    "Npgsql.OpenTelemetry/9.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-i62hdoWS0i+G9PXxE7G0G0bfpmwEhTKvF7qSsR+yqAspEyXYaXEAow3xCSGESvcc7CJZHsFGowiHosXmEfWYcw==",
+      "path": "npgsql.opentelemetry/9.0.2",
+      "hashPath": "npgsql.opentelemetry.9.0.2.nupkg.sha512"
     },
     "OpenTelemetry/1.11.2": {
       "type": "package",

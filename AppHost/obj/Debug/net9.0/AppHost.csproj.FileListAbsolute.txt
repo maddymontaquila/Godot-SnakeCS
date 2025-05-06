@@ -137,3 +137,6 @@
 /Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.pdb
 /Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/AppHost.genruntimeconfig.cache
 /Users/maddy/source/Godot-SnakeCS/AppHost/obj/Debug/net9.0/ref/AppHost.dll
+/Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/Aspire.Hosting.PostgreSQL.dll
+/Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/HealthChecks.NpgSql.dll
+/Users/maddy/source/Godot-SnakeCS/AppHost/bin/Debug/net9.0/Npgsql.dll

@@ -6,5 +6,6 @@
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration.binder/9.0.3/buildTransitive/netstandard2.0/Microsoft.Extensions.Configuration.Binder.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration.binder/9.0.3/buildTransitive/netstandard2.0/Microsoft.Extensions.Configuration.Binder.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.telemetry.abstractions/9.3.0/buildTransitive/net8.0/Microsoft.Extensions.Telemetry.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.telemetry.abstractions/9.3.0/buildTransitive/net8.0/Microsoft.Extensions.Telemetry.Abstractions.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.http.resilience/9.3.0/buildTransitive/net8.0/Microsoft.Extensions.Http.Resilience.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.http.resilience/9.3.0/buildTransitive/net8.0/Microsoft.Extensions.Http.Resilience.targets')" />
+    <Import Project="$(NuGetPackageRoot)aspire.npgsql/9.2.1/buildTransitive/net8.0/Aspire.Npgsql.targets" Condition="Exists('$(NuGetPackageRoot)aspire.npgsql/9.2.1/buildTransitive/net8.0/Aspire.Npgsql.targets')" />
   </ImportGroup>
 </Project>
