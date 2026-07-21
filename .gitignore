@@ -9,3 +9,6 @@ obj/
 
 # JavaScript outputs
 node_modules/
+
+# Local service build artifacts
+Services/MatchmakingService/*.exe
