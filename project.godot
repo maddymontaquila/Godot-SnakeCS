@@ -12,13 +12,13 @@ config_version=5
 
 config/name="Snakes"
 run/main_scene="res://Scenes/Snake.tscn"
-config/features=PackedStringArray("4.1", "C#", "Mobile")
+config/features=PackedStringArray("4.7", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_height=510
 
 [dotnet]
 

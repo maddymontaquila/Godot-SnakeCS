@@ -1,6 +1,6 @@
 {
   "appHost": {
-    "path": "apphost.cs",
-    "language": "csharp"
-  }
+    "path": "AppHost\\apphost.cs"
+  },
+  "channel": "daily"
 }

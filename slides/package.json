@@ -1,0 +1,19 @@
+{
+  "name": "godotcon-aspire-slides",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@fontsource/fira-code": "^5.2.7",
+    "@fontsource/poppins": "^5.2.7",
+    "reveal.js": "^5.1.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.19"
+  }
+}

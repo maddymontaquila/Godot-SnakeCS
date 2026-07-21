@@ -1,11 +1,16 @@
-<Project Sdk="Godot.NET.Sdk/4.1.0">
+<Project Sdk="Godot.NET.Sdk/4.7.1">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="apphost.cs" />
+    <Compile Remove="AppHost\**\*.cs" />
     <Compile Remove="Services\**\*.cs" />
     <Compile Remove=".godot\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="OpenTelemetry" Version="1.17.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.17.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.17.0" />
   </ItemGroup>
 </Project>

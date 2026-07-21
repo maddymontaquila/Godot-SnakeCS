@@ -12,3 +12,6 @@ node_modules/
 
 # Local service build artifacts
 Services/MatchmakingService/*.exe
+
+# Legacy local scores are imported into Postgres on first startup.
+Services/ScoreService/data/

@@ -9,6 +9,9 @@ public partial class SnakeBody : Sprite2D
 	[Signal]
 	public delegate void GameOverEventHandler();
 
+	[Signal]
+	public delegate void AppleEatenEventHandler();
+
 	private double _time = 0;
 	private enum Direction
 	{
@@ -20,8 +23,13 @@ public partial class SnakeBody : Sprite2D
 
 	private Direction _direction;
 	private List<Rect2> _body;
-	private bool _eat = false;
 	private bool _crash = false;
+	private bool _gameOverEmitted = false;
+	private double _deathElapsed = 0;
+	private Texture2D _bodyTexture;
+	private Texture2D _headTexture;
+	public Vector2? ApplePosition { get; set; }
+	public int Length => _body.Count;
 	public override void _Ready()
 	{
 		_direction = Direction.RIGHT;
@@ -30,24 +38,53 @@ public partial class SnakeBody : Sprite2D
 			new Rect2(0, 0, 40, 40),
 			new Rect2(40, 0, 40, 40)
 		};
+		_bodyTexture = GD.Load<Texture2D>("res://Assets/snake-body.svg");
+		_headTexture = GD.Load<Texture2D>("res://Assets/snake-head.svg");
 		ZIndex = 1;
 	}
 
 	public override void _Draw()
 	{
-		var color = new Color(0,1,0);
-		foreach(var rect in _body){
-			DrawRect(new Rect2(rect.Position.X+2, rect.Position.Y+2, 36, 36), color);
+		for (var index = _body.Count - 1; index >= 0; index--)
+		{
+			var rect = _body[index];
+			if (index == 0)
+			{
+				DrawSetTransform(rect.GetCenter(), GetHeadRotation(), Vector2.One);
+				DrawTextureRect(_headTexture, new Rect2(-20, -20, 40, 40), false);
+				DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+			}
+			else
+			{
+				DrawTextureRect(_bodyTexture, rect, false);
+			}
+		}
+
+		if (_crash)
+		{
+			var flash = Mathf.PingPong((float)_deathElapsed * 12, 1);
+			var deathColor = new Color(1, 0.2f, 0.72f, 0.45f + flash * 0.5f);
+			foreach (var rect in _body)
+			{
+				DrawRect(new Rect2(rect.Position + new Vector2(4, 4), rect.Size - new Vector2(8, 8)), deathColor);
+			}
 		}
 	}
 
-	public bool TryEat(Apple apple)
+	private float GetHeadRotation()
 	{
-		if(_body[0].Position.X == apple.Position.X && _body[0].Position.Y == apple.Position.Y){
-			GD.Print("Eat Apple!");
-			_eat = true;
-		}
-		return _eat;
+		return _direction switch
+		{
+			Direction.RIGHT => 0,
+			Direction.DOWN => Mathf.Pi / 2,
+			Direction.LEFT => Mathf.Pi,
+			_ => -Mathf.Pi / 2
+		};
+	}
+
+	public bool IsOccupied(Vector2 position)
+	{
+		return _body.Any(rect => rect.Position == position);
 	}
 
 	public bool Crash()
@@ -59,6 +96,19 @@ public partial class SnakeBody : Sprite2D
 
 	public override void _Process(double delta)
 	{
+		if (_crash)
+		{
+			_deathElapsed += delta;
+			QueueRedraw();
+			if (_deathElapsed >= 0.75 && !_gameOverEmitted)
+			{
+				_gameOverEmitted = true;
+				EmitSignal(SignalName.GameOver);
+			}
+
+			return;
+		}
+
 		_time += delta;
 		if(_time > 0.5){
 			var translation = _direction switch
@@ -84,26 +134,36 @@ public partial class SnakeBody : Sprite2D
 					newRect.Position = new Vector2(newRect.Position.X, 0);
 				}
 
+				var ateApple = ApplePosition is Vector2 applePosition && newRect.Position == applePosition;
 				_body.Insert(0, newRect);
-				if(!_eat){
+				if(!ateApple){
 					_body.RemoveAt(_body.Count-1);
+				}
+				else{
+					GD.Print("Eat Apple!");
+					EmitSignal(SignalName.AppleEaten);
 				}
 				if(Crash()){
 					GD.Print("CRASH! Game Over");
 					_crash = true;
-					EmitSignal(SignalName.GameOver);
+					_deathElapsed = 0;
+					QueueRedraw();
 				}
 			}
 			if (!_crash){
 				QueueRedraw();
 			}
-			_eat = false;
 			_time = 0;
 		}
 	}
 
 	public override void _Input(InputEvent @event)
 	{
+		if (_crash || GetViewport().GuiGetFocusOwner() is LineEdit)
+		{
+			return;
+		}
+
 		if(@event.IsAction("ui_left") && _direction != Direction.RIGHT)
 		{
 			_direction = Direction.LEFT;

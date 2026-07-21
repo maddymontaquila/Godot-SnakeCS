@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6u3pqukqn4a4"]
+[gd_scene load_steps=5 format=3 uid="uid://b6u3pqukqn4a4"]
 
 [ext_resource type="Script" path="res://Scenes/Snake.cs" id="1_efryv"]
 [ext_resource type="Script" path="res://Scenes/SnakeBody.cs" id="2_troh1"]
 [ext_resource type="Script" path="res://Scenes/Apple.cs" id="3_n6s0l"]
+[ext_resource type="Texture2D" path="res://Assets/aspire-gem.svg" id="4_aspiregem"]
 
 [node name="Snake" type="Node2D"]
 script = ExtResource("1_efryv")
@@ -11,4 +12,130 @@ script = ExtResource("1_efryv")
 script = ExtResource("2_troh1")
 
 [node name="Apple" type="Sprite2D" parent="."]
+texture = ExtResource("4_aspiregem")
+centered = false
 script = ExtResource("3_n6s0l")
+
+[node name="DemoUi" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ScoreLabel" type="Label" parent="DemoUi"]
+offset_left = 460.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0.862745, 0.705882, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "SCORE: 0"
+horizontal_alignment = 2
+
+[node name="GameOverPopup" type="ColorRect" parent="DemoUi"]
+visible = false
+offset_left = 160.0
+offset_top = 112.0
+offset_right = 480.0
+offset_bottom = 282.0
+mouse_filter = 0
+color = Color(0.109804, 0.0470588, 0.156863, 0.98)
+
+[node name="Title" type="Label" parent="DemoUi/GameOverPopup"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 300.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(1, 0.380392, 0.780392, 1)
+theme_override_font_sizes/font_size = 24
+text = "SNAKE CRASHED!"
+horizontal_alignment = 1
+
+[node name="FinalScore" type="Label" parent="DemoUi/GameOverPopup"]
+offset_left = 20.0
+offset_top = 66.0
+offset_right = 300.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(0.862745, 0.705882, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "FINAL SCORE: 0"
+horizontal_alignment = 1
+
+[node name="NewGameButton" type="Button" parent="DemoUi/GameOverPopup"]
+offset_left = 84.0
+offset_top = 112.0
+offset_right = 236.0
+offset_bottom = 148.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 15
+text = "NEW GAME"
+
+[node name="Panel" type="ColorRect" parent="DemoUi"]
+offset_left = 8.0
+offset_top = 370.0
+offset_right = 632.0
+offset_bottom = 502.0
+mouse_filter = 2
+color = Color(0.054902, 0.039216, 0.109804, 0.96)
+
+[node name="Title" type="Label" parent="DemoUi/Panel"]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 280.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.862745, 0.705882, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "ASPIRE ARCADE"
+
+[node name="PlayerName" type="LineEdit" parent="DemoUi/Panel"]
+offset_left = 12.0
+offset_top = 34.0
+offset_right = 152.0
+offset_bottom = 60.0
+placeholder_text = "PLAYER NAME"
+max_length = 32
+
+[node name="MatchmakingButton" type="Button" parent="DemoUi/Panel"]
+offset_left = 164.0
+offset_top = 34.0
+offset_right = 304.0
+offset_bottom = 60.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 13
+text = "FIND MATCH"
+
+[node name="DemoOpponentButton" type="Button" parent="DemoUi/Panel"]
+offset_left = 316.0
+offset_top = 34.0
+offset_right = 456.0
+offset_bottom = 60.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 13
+text = "DEMO OPPONENT"
+
+[node name="LeaderboardButton" type="Button" parent="DemoUi/Panel"]
+offset_left = 12.0
+offset_top = 68.0
+offset_right = 152.0
+offset_bottom = 100.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 13
+text = "LEADERBOARD"
+
+[node name="ScoreButton" type="Button" parent="DemoUi/Panel"]
+offset_left = 468.0
+offset_top = 34.0
+offset_right = 608.0
+offset_bottom = 60.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 13
+text = "POST SCORE"
+
+[node name="DemoStatus" type="Label" parent="DemoUi/Panel"]
+offset_left = 164.0
+offset_top = 66.0
+offset_right = 608.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(0.647059, 0.960784, 0.721569, 1)
+theme_override_font_sizes/font_size = 12
+text = "RUN THROUGH ASPIRE
+for live demos."
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (() => {
+        const param = new URLSearchParams(window.location.search).get("scoutTheme");
+        const theme =
+          param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <title>Beyond the game - GodotCon 2026</title>
+    <script type="module" crossorigin src="./assets/index-B2Qt40Fc.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BVnxmZgc.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="title-slide" data-background-image="./assets/aspire-title.png" data-background-size="cover" data-transition="fade">
+          <img class="brand-mark" src="./assets/aspire-icon.svg" alt="Aspire" />
+          <div class="title-lockup">
+            <p class="eyebrow">GodotCon 2026</p>
+            <h1>Beyond the game</h1>
+            <p class="subtitle">Developing your full end-to-end with Aspire</p>
+            <p class="byline">Maddy Montaquila · @maddymontaquila · @maddy.fm</p>
+          </div>
+          <aside class="notes">
+            Keep the opening familiar from the original deck, but do not explain Aspire yet. Welcome the room, establish that this is a game-dev talk, and set up the idea that the game is only the visible part of the system.
+          </aside>
+        </section>
+
+        <section class="big-line" data-transition="fade">
+          <h2>I just wanted to make a game.</h2>
+          <p class="fragment fade-up">Nothing else.</p>
+          <aside class="notes">
+            Let this breathe. The joke lands because everyone in the room has had a tiny feature turn into a pile of infrastructure.
+          </aside>
+        </section>
+
+        <section class="explosion-slide" data-transition="fade" data-auto-animate>
+          <p class="eyebrow">It always starts simple</p>
+          <div class="explosion">
+            <div class="game-core" data-id="game-core">
+              <span class="game-icon">🎮</span>
+              <strong>Game</strong>
+            </div>
+            <div class="feature-radar">
+              <span class="feature fragment fade-in">Leaderboard</span>
+              <span class="feature fragment fade-in">Matchmaking</span>
+              <span class="feature fragment fade-in">Cloud Saves</span>
+              <span class="feature fragment fade-in">Friends</span>
+              <span class="feature fragment fade-in">Analytics</span>
+              <span class="feature fragment fade-in">Authentication</span>
+            </div>
+            <div class="infra-cloud fragment fade-in">
+              <span>Redis</span><span>Postgres</span><span>Docker</span><span>Storage</span>
+              <span>Containers</span><span>OpenTelemetry</span><span>Message Queues</span>
+              <span>APIs</span><span>Identity</span><span>Monitoring</span><span>Secrets</span><span>CI/CD</span>
+            </div>
+          </div>
+          <h2 class="quiet-punch fragment fade-up">...wait.</h2>
+          <aside class="notes">
+            Click through each reasonable game feature. None of these are ridiculous. Then reveal the infrastructure cloud and pause. The point is not that game developers made bad choices; the point is that modern player expectations quietly require backend systems.
+          </aside>
+        </section>
+
+        <section class="terminal-slide" data-transition="fade">
+          <p class="eyebrow">Then your morning starts like this</p>
+          <div class="terminal-stack">
+            <pre class="terminal fragment fade-up"><code>$ docker compose up</code></pre>
+            <pre class="terminal fragment fade-up"><code>$ npm run dev</code></pre>
+            <pre class="terminal fragment fade-up"><code>$ dotnet watch</code></pre>
+            <pre class="terminal fragment fade-up"><code>$ godot --path .</code></pre>
+            <pre class="terminal fragment fade-up"><code>$ redis-server</code></pre>
+            <pre class="terminal fragment fade-up"><code>$ azurite --silent</code></pre>
+          </div>
+          <h2 class="fragment fade-up">This is normal now.</h2>
+          <aside class="notes">
+            Play this as comedy, not complaint. Every terminal has a reason to exist. The absurdity is that we normalized needing a launch checklist before touching gameplay.
+          </aside>
+        </section>
+
+        <section class="full-stack-slide" data-transition="fade">
+          <p class="eyebrow">Game dev is full-stack dev</p>
+          <div class="split-hero">
+            <div class="player-view">
+              <p>Players only see</p>
+              <div class="giant-emoji">🎮</div>
+            </div>
+            <div class="team-view">
+              <p>Teams maintain</p>
+              <div class="tag-grid">
+                <span class="fragment fade-up">Leaderboards</span>
+                <span class="fragment fade-up">Matchmaking</span>
+                <span class="fragment fade-up">Auth</span>
+                <span class="fragment fade-up">Cloud Saves</span>
+                <span class="fragment fade-up">APIs</span>
+                <span class="fragment fade-up">Databases</span>
+                <span class="fragment fade-up">Containers</span>
+                <span class="fragment fade-up">Monitoring</span>
+                <span class="fragment fade-up">Telemetry</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            This is adapted from the original "Game dev is full-stack dev" slide. Keep it visual: players experience the game; teams own the invisible system that lets the game feel alive.
+          </aside>
+        </section>
+
+        <section class="big-line" data-transition="fade">
+          <h2>Games became distributed systems.</h2>
+          <aside class="notes">
+            Do not mention Aspire. This is the thesis of the problem. Pause after the line and let people connect it to their own projects.
+          </aside>
+        </section>
+
+        <section class="city-slide" data-background-image="./assets/aspire-icon-hero.png" data-background-size="cover" data-transition="fade">
+          <div class="scrim-card">
+            <p class="eyebrow">Modern apps</p>
+            <h2>A big city without a map.</h2>
+          </div>
+          <div class="constellation">
+            <span class="fragment fade-in">Services</span>
+            <span class="fragment fade-in">Databases</span>
+            <span class="fragment fade-in">Queues</span>
+            <span class="fragment fade-in">Auth</span>
+            <span class="fragment fade-in">Secrets</span>
+            <span class="fragment fade-in">Ports</span>
+            <span class="fragment fade-in">Telemetry</span>
+            <span class="fragment fade-in">Containers</span>
+            <span class="fragment fade-in">Deploy scripts</span>
+          </div>
+          <aside class="notes">
+            This reuses the original "big city without a map" idea but removes the dense lists. The emotional point is navigation: teams need to understand where everything is and how it relates.
+          </aside>
+        </section>
+
+        <section class="big-line" data-transition="fade">
+          <p class="eyebrow">Eventually I stopped asking for another script.</p>
+          <h2>I wanted one command.</h2>
+          <aside class="notes">
+            This is the turn into Act 2. Aspire should feel like the answer that emerges from the story, not a product being introduced first.
+          </aside>
+        </section>
+
+        <section class="aspire-run-slide" data-transition="fade" data-auto-animate>
+          <div class="command-center">
+            <pre class="terminal hero-terminal"><code>&gt; aspire run</code></pre>
+            <div class="live-system">
+              <div class="service-card fragment fade-up"><span class="dot"></span> game-api</div>
+              <div class="service-card fragment fade-up"><span class="dot"></span> leaderboard</div>
+              <div class="service-card fragment fade-up"><span class="dot"></span> redis</div>
+              <div class="service-card fragment fade-up"><span class="dot"></span> postgres</div>
+              <div class="dashboard-card fragment fade-up">
+                <strong>Dashboard</strong>
+                <div class="mini-bars"><i></i><i></i><i></i></div>
+              </div>
+              <div class="signal-row">
+                <span class="fragment fade-in">Health checks</span>
+                <span class="fragment fade-in">Tracing</span>
+                <span class="fragment fade-in">Logs</span>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Reveal one capability at a time: services start, dashboard appears, then health, traces, and logs come alive. Keep it local-first. One command is the emotional payload.
+          </aside>
+        </section>
+
+        <section class="demo-slide" data-transition="zoom">
+          <p class="eyebrow">Demo</p>
+          <h2>Start the whole stack.</h2>
+          <p class="demo-cue">Show the repo. Run the command. Let the system appear.</p>
+          <aside class="notes">
+            Live demo beat one: run Aspire against the Godot sample. Do not over-explain architecture yet. Show that the loop starts from one place.
+          </aside>
+        </section>
+
+        <section class="map-slide" data-transition="fade">
+          <p class="eyebrow">AppHost</p>
+          <h2>The map.</h2>
+          <div class="map-layout">
+            <pre class="code-card"><code>var builder = DistributedApplication.CreateBuilder(args);
+
+var db = builder.AddPostgres("postgres");
+var cache = builder.AddRedis("redis");
+
+builder.AddProject("game-api")
+       .WithReference(db)
+       .WithReference(cache);
+
+builder.Build().Run();</code></pre>
+            <svg class="service-map" viewBox="0 0 640 420" role="img" aria-label="Service relationship map">
+              <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" />
+                </marker>
+              </defs>
+              <path class="link" d="M320 95 C250 140 220 205 190 285" marker-end="url(#arrow)" />
+              <path class="link" d="M320 95 C390 140 420 205 450 285" marker-end="url(#arrow)" />
+              <path class="link" d="M320 95 C320 165 320 220 320 300" marker-end="url(#arrow)" />
+              <g class="node primary"><rect x="230" y="36" width="180" height="86" rx="24" /><text x="320" y="87">game-api</text></g>
+              <g class="node"><rect x="88" y="276" width="160" height="76" rx="22" /><text x="168" y="323">postgres</text></g>
+              <g class="node"><rect x="240" y="300" width="160" height="76" rx="22" /><text x="320" y="347">redis</text></g>
+              <g class="node"><rect x="392" y="276" width="160" height="76" rx="22" /><text x="472" y="323">godot</text></g>
+            </svg>
+          </div>
+          <aside class="notes">
+            AppHost is not "more config." It is the place where the relationships are visible in code. Use the map metaphor from the existing deck, but keep implementation details verbal.
+          </aside>
+        </section>
+
+        <section class="dashboard-slide" data-transition="fade">
+          <p class="eyebrow">Dashboard</p>
+          <h2>My debugger for the entire system.</h2>
+          <div class="dashboard-shell">
+            <div class="dashboard-nav">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="dashboard-grid">
+              <div class="panel health fragment fade-up"><strong>Health</strong><i></i><i></i><i></i></div>
+              <div class="panel traces fragment fade-up"><strong>Traces</strong><svg viewBox="0 0 280 90"><path d="M10 65 C60 10 92 78 135 38 S220 42 270 18" /></svg></div>
+              <div class="panel logs fragment fade-up"><strong>Logs</strong><code>GET /leaderboard 200<br />cache hit<br />saved cloud slot</code></div>
+              <div class="panel relationships fragment fade-up"><strong>Relationships</strong><span>game-api → redis</span><span>game-api → postgres</span></div>
+            </div>
+          </div>
+          <aside class="notes">
+            Avoid product terminology. It is okay to say the dashboard is powered by OpenTelemetry, but frame it as visibility from the beginning rather than a monitoring product.
+          </aside>
+        </section>
+
+        <section class="building-blocks-slide" data-transition="fade">
+          <p class="eyebrow">Integrations</p>
+          <h2>Building blocks. Not magic.</h2>
+          <div class="blocks-grid">
+            <span class="fragment fade-up">Redis</span>
+            <span class="fragment fade-up">Postgres</span>
+            <span class="fragment fade-up">Containers</span>
+            <span class="fragment fade-up">Storage</span>
+            <span class="fragment fade-up">Messaging</span>
+            <span class="fragment fade-up">AI</span>
+            <span class="fragment fade-up">Queues</span>
+            <span class="fragment fade-up">Existing services</span>
+          </div>
+          <p class="supporting">Aspire works with the tools you already use.</p>
+          <aside class="notes">
+            This adapts the Integrations slide. The key message for GodotCon is that Aspire does not replace Redis, Postgres, containers, or your deployment platform. It helps you compose and run them coherently.
+          </aside>
+        </section>
+
+        <section class="cli-slide" data-transition="fade">
+          <p class="eyebrow">CLI</p>
+          <h2>The one place I start everything.</h2>
+          <div class="control-plane">
+            <pre class="terminal"><code>&gt; aspire run</code></pre>
+            <pre class="terminal fragment fade-up"><code>&gt; aspire add redis</code></pre>
+            <pre class="terminal fragment fade-up"><code>&gt; aspire deploy</code></pre>
+          </div>
+          <p class="supporting">One control plane for the local loop, without locking you into one cloud.</p>
+          <aside class="notes">
+            Mention open source, code-first, local-first, cloud agnostic, and OpenTelemetry here. Keep Azure out unless someone asks. This audience needs to hear that Aspire is useful even if their deployment target is not Azure.
+          </aside>
+        </section>
+
+        <section class="demo-slide" data-transition="zoom">
+          <p class="eyebrow">Demo</p>
+          <h2>Trace a player action.</h2>
+          <p class="demo-cue">Click through the game, then follow the request across services.</p>
+          <aside class="notes">
+            Live demo beat two: trigger a visible game action and follow the backend path in the dashboard. This turns "distributed systems" from abstract architecture into a player moment.
+          </aside>
+        </section>
+
+        <section class="before-after-slide" data-transition="fade">
+          <p class="eyebrow">What changes for game teams</p>
+          <div class="before-after">
+            <div>
+              <h3>Before</h3>
+              <ul>
+                <li class="fragment fade-up">Did you start Redis?</li>
+                <li class="fragment fade-up">Wrong port.</li>
+                <li class="fragment fade-up">Missing env vars.</li>
+                <li class="fragment fade-up">Works on my machine.</li>
+                <li class="fragment fade-up">Docker isn't running.</li>
+                <li class="fragment fade-up">Can't reproduce staging.</li>
+              </ul>
+            </div>
+            <div class="after">
+              <h3>After</h3>
+              <pre class="terminal hero-terminal fragment fade-up"><code>&gt; aspire run</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            This reworks the original "What changes for game teams" content into an emotional before/after. The after column should feel almost comically small.
+          </aside>
+        </section>
+
+        <section class="demo-slide" data-transition="zoom">
+          <p class="eyebrow">Demo</p>
+          <h2>Break something on purpose.</h2>
+          <p class="demo-cue">Show how failures become visible instead of mysterious.</p>
+          <aside class="notes">
+            Live demo beat three: stop a dependency, misconfigure a path, or force an error. The payoff is observability during the inner loop, before players or staging discover it.
+          </aside>
+        </section>
+
+        <section class="final-slide" data-background-image="./assets/aspire-title.png" data-background-size="cover" data-transition="fade">
+          <div class="final-lockup">
+            <h2>Spend your time making games.</h2>
+            <p class="fragment fade-up">Not infrastructure.</p>
+          </div>
+          <aside class="notes">
+            Close on the audience, not Aspire. The best ending is that the infrastructure fades back into support for the game.
+          </aside>
+        </section>
+
+        <section class="thanks-slide" data-transition="fade">
+          <img class="brand-mark" src="./assets/aspire-icon.svg" alt="Aspire" />
+          <p class="eyebrow">Thank you</p>
+          <h2>Beyond the game</h2>
+          <p class="subtitle">Maddy Montaquila</p>
+          <p class="byline">@maddymontaquila · @maddy.fm</p>
+          <p class="supporting">Aspire is open source, code-first, local-first, cloud agnostic, and built around OpenTelemetry.</p>
+          <aside class="notes">
+            Thank the audience. If there is time, invite people to try the sample, ask about their own backend pain, and keep the conversation centered on game development workflows.
+          </aside>
+        </section>
+      </div>
+    </div>
+
+  </body>
+</html>

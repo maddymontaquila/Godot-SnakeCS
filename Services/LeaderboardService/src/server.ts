@@ -1,3 +1,4 @@
+import "./telemetry.ts";
 import { createServer, type ServerResponse } from "node:http";
 
 const port = Number(process.env.PORT ?? 8082);
@@ -14,12 +15,6 @@ type ScoreEntry = {
   playedAt: string;
 };
 
-const fallbackScores: ScoreEntry[] = [
-  { player: "Maddy", points: 42, mode: "classic", playedAt: new Date().toISOString() },
-  { player: "Clint", points: 37, mode: "xbox-context", playedAt: new Date().toISOString() },
-  { player: "Nick", points: 35, mode: "godot-demo", playedAt: new Date().toISOString() }
-];
-
 const server = createServer(async (request, response) => {
   const url = new URL(request.url ?? "/", `http://${request.headers.host ?? "localhost"}`);
 
@@ -28,12 +23,18 @@ const server = createServer(async (request, response) => {
   }
 
   if (url.pathname === "/leaderboard") {
-    const scores = await loadScores();
-    return writeJson(response, 200, {
-      generatedAt: new Date().toISOString(),
-      source: scoreApiUrl ? "score-api" : "local-fallback",
-      leaders: scores.sort((a, b) => b.points - a.points).slice(0, 5)
-    });
+    try {
+      const scores = await loadScores();
+      return writeJson(response, 200, {
+        generatedAt: new Date().toISOString(),
+        source: "score-api",
+        leaders: scores.slice(0, 5)
+      });
+    } catch (error) {
+      return writeJson(response, 503, {
+        error: error instanceof Error ? error.message : "Score API is unavailable."
+      });
+    }
   }
 
   writeJson(response, 404, { error: "Not found" });
@@ -45,7 +46,7 @@ server.listen(port, () => {
 
 async function loadScores(): Promise<ScoreEntry[]> {
   if (!scoreApiUrl) {
-    return fallbackScores;
+    throw new Error("SCORE_API_URL is not configured.");
   }
 
   const response = await fetch(`${scoreApiUrl}/scores`);
