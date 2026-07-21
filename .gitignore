@@ -9,6 +9,19 @@ obj/
 
 # JavaScript outputs
 node_modules/
+slides/dist/
+
+# Local Aspire and IDE state
+.aspire/
+.vs/
+*.suo
+*.user
+
+# Local environment and tool settings
+.env
+.env.*
+!.env.example
+**/.claude/settings.local.json
 
 # Local service build artifacts
 Services/MatchmakingService/*.exe
