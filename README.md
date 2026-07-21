@@ -26,7 +26,7 @@ Remember to modify **[.vscode/launch.json](.vscode/launch.json)** and change **{
 
 ### Aspire demo
 
-The root **[apphost.cs](apphost.cs)** is a single file-based C# AppHost. It starts:
+The root **[apphost.cs](apphost.cs)** file models the local stack. It starts:
 
 | Resource | Language | Purpose |
 | --- | --- | --- |
@@ -39,8 +39,8 @@ Run the full local stack:
 
 ```powershell
 dotnet run --file apphost.cs
-aspire ps
-aspire describe
+aspire ps --format Json
+aspire describe --format Json
 ```
 
 Useful endpoints once the dashboard starts:

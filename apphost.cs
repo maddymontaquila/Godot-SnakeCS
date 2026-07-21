@@ -1,4 +1,4 @@
-#:sdk Aspire.AppHost.Sdk@13.4.6
+﻿#:sdk Aspire.AppHost.Sdk@13.4.6
 #:package Aspire.Hosting.Go@13.4.6-preview.1.26319.6
 #:package Aspire.Hosting.JavaScript@13.4.6
 
