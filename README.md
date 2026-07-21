@@ -1,76 +1,41 @@
 # Snake C# + Aspire
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
-[![Godot v4.0](https://img.shields.io/badge/Godot-v4.0-blue.svg)](https://github.com/ramaureirac/godot-tactical-rpg/tree/release/godot-v4.0)
 
-Basic snake game sample made with C# for Godot 4.0+, now paired with a modern Aspire AppHost that models the backend stack a game usually grows around: scores, leaderboards, matchmaking, and the local orchestration needed to debug them together.
+A pixel-art Godot Snake game backed by an Aspire-orchestrated score API, PostgreSQL leaderboard, matchmaking service, Reveal.js demo deck, and end-to-end OpenTelemetry.
 
-It has a main scene with three nodes:
+## Requirements
 
-![Scenes](scenes.jpg)
-
-Each one of the nodes has a script in C# to implement the game logic.
-
-### Requirements
-
-- [.NET 10 SDK](https://get.dot.net) for the Aspire AppHost and services
-- [.NET 8+ SDK](https://get.dot.net) for the Godot C# project
+- [.NET 10 SDK](https://get.dot.net)
 - [Godot Engine .NET 4.7.1](https://godotengine.org/download/windows)
 - [Aspire CLI](https://aspire.dev)
-- [Go](https://go.dev)
-- [Node.js](https://nodejs.org)
-- [Visual Studio Code](https://code.visualstudio.com/)
-  - [C# Dev Kit Extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
+- [Go](https://go.dev) and [Node.js](https://nodejs.org)
 
-Remember to modify **[.vscode/launch.json](.vscode/launch.json)** and change **{path_to_godot}** to your installation path to enable debugging on Visual Studio Code.
+## Run
 
-### Aspire demo
-
-The file-based **[AppHost](AppHost/apphost.cs)** models the local stack. It starts:
-
-| Resource | Language | Purpose |
-| --- | --- | --- |
-| `postgres` / `scores` | PostgreSQL | Aspire-managed persistent database for submitted scores. |
-| `score-api` | C# / ASP.NET Core | Persists submitted scores in PostgreSQL and exposes `/scores`, `/leaderboard`, and `/health`. |
-| `matchmaking-api` | Go | Maintains a live queue, pairs distinct players through `/match`, and seeds labeled demo leaderboard scores when using the explicit demo opponent. |
-| `leaderboard-api` | TypeScript / Node.js | Reads the persisted score API data and exposes `/leaderboard`. |
-| `godot-snake-client` | C# / Godot | Runs the existing Godot game through the Godot .NET CLI, or builds the C# project when no CLI is configured. |
-
-Run the full local stack:
+Everything starts through Aspire:
 
 ```powershell
-$env:GODOT_EXECUTABLE = "C:\path\to\Godot_v4.x-stable_mono_win64_console.exe"
-dotnet run --file AppHost\apphost.cs
-aspire ps --format Json
-aspire describe --format Json
+$env:GODOT_EXECUTABLE = "C:\path\to\Godot_v4.7.1-stable_mono_win64_console.exe"
+$env:GODOT_HEADLESS = "false" # Launch the playable Godot window.
+aspire run
 ```
 
-`GODOT_EXECUTABLE` is optional. When it points to the Godot .NET/Mono console executable, Aspire runs the Godot client through the Godot CLI; otherwise it falls back to building `Snakes.csproj`.
-Submitted scores are stored in Aspire's persistent PostgreSQL volume.
+`GODOT_EXECUTABLE` is optional: without it, the Godot resource builds `Snakes.csproj` instead. Aspire discovers the file-based AppHost from `aspire.config.json`; the dashboard prints its URL when the stack starts.
 
-To launch the playable Godot window with the leaderboard, matchmaking, and score-demo buttons connected to the Aspire services:
+| Resource | Purpose |
+| --- | --- |
+| `postgres` / `scores` | Persistent PostgreSQL score store |
+| `score-api` | C# score and leaderboard API |
+| `matchmaking-api` | Go queue and demo-opponent matcher |
+| `leaderboard-api` | Node.js leaderboard proxy |
+| `slides` | Reveal.js presentation, linked as **slides** in the dashboard |
+| `godot-snake-client` | Playable Godot client |
 
-```powershell
-$env:GODOT_HEADLESS = "false"
-dotnet run --file AppHost\apphost.cs
-```
+## Demo
 
-For a deterministic presentation, click **Find Match**, then **Demo Opponent** to pair the queued player with the clearly labeled Aspire Demo Bot and seed three idempotent `Demo` leaderboard entries. A real second player can still join the same queue normally.
+Play to earn score, then use **Find Match** and **Demo Opponent** to pair with Aspire Demo Bot and seed labeled demo scores. Open **Leaderboard** to display persisted results. The dashboard’s **Clear leaderboard** action on `leaderboard-api` removes all scores after confirmation.
 
-The custom Godot resource uses Fluent's **Games** icon in the dashboard. Use **Clear leaderboard** on `leaderboard-api` to remove all persisted player and demo scores; Aspire asks for confirmation and reports the number of removed rows.
-
-### Traces
-
-The Aspire dashboard receives OpenTelemetry traces from the Godot client, matchmaking API, score API/PostgreSQL, and leaderboard API. For a complete demo trace, click **Find Match**, **Demo Opponent**, then **Leaderboard**, and open **Traces** in the dashboard.
-
-Useful endpoints once the dashboard starts:
-
-```powershell
-curl http://localhost:<score-api-port>/scores
-curl -X POST http://localhost:<matchmaking-api-port>/match -H "Content-Type: application/json" -d '{\"player\":\"Player One\",\"mode\":\"classic\"}'
-curl http://localhost:<leaderboard-api-port>/leaderboard
-```
-
-### Preview
+Godot, matchmaking, leaderboard, and Postgres-backed scoring export OpenTelemetry to the Aspire dashboard. For one connected trace, use **Find Match**, **Demo Opponent**, then **Leaderboard** and open **Traces**.
 
 ![Snake C# screenshot](screenshot-1.jpg?raw=true "Godot C# screenshot")
