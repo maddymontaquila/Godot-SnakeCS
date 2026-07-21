@@ -898,6 +898,31 @@ body {
   letter-spacing: inherit;
 }
 
+/* Spans inside headings (e.g. the gradient <span> in the definition slide)
+   must not pick up the deck's global 34px span size. */
+.reveal h1 span,
+.reveal h2 span,
+.reveal h3 span {
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+/* Brand-tinted C# syntax highlighting — scoped to the AppHost code card so
+   the terminal slides stay plain white-on-dark. */
+.code-card .hljs-keyword,
+.code-card .hljs-literal,
+.code-card .hljs-built_in { color: #b9aaee; }
+.code-card .hljs-string { color: #7ed3ac; }
+.code-card .hljs-title,
+.code-card .hljs-title.function_,
+.code-card .hljs-type,
+.code-card .hljs-title.class_,
+.code-card .hljs-property,
+.code-card .hljs-attr { color: #7cc5f0; }
+.code-card .hljs-number { color: #f2a65a; }
+.code-card .hljs-comment { color: #8a85a3; font-style: italic; }
+
 .reveal .fragment {
   will-change: transform, opacity;
 }
@@ -987,7 +1012,11 @@ body {
 .definition-slide {
   display: grid !important;
   place-content: center start;
-  background: linear-gradient(160deg, #f5f2ff 0%, #e9e2fb 100%);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--aspire-color-purple) 26%, var(--page-bg)) 0%,
+    var(--page-bg) 64%
+  );
 }
 
 .definition-slide .eyebrow {
@@ -999,7 +1028,7 @@ body {
   font-size: 68px;
   line-height: 1.22;
   letter-spacing: -0.03em;
-  color: var(--aspire-color-black);
+  color: var(--text);
 }
 
 .definition-slide .grad {

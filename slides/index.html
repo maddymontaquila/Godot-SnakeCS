@@ -171,21 +171,21 @@
           <p class="eyebrow">AppHost</p>
           <h2>The map.</h2>
           <div class="map-layout">
-            <pre class="code-card"><code>var builder = DistributedApplication.CreateBuilder(args);
+            <pre class="code-card"><code class="language-csharp">var builder = DistributedApplication.CreateBuilder(args);
 
 var db = builder.AddPostgres("postgres")
-                .AddDatabase("scores");
+    .AddDatabase("scores");
 
-var scoreApi = builder.AddCSharpApp("score-api",
-        "../Services/ScoreService")
+var scoreApi = builder.AddCSharpApp("score-api")
     .WithReference(db);
-builder.AddGoApp("matchmaking-api",
-        "../Services/MatchmakingService")
+
+builder.AddGoApp("matchmaking-api")
     .WithReference(scoreApi);
-builder.AddNodeApp("leaderboard-api",
-        "../Services/LeaderboardService")
+
+builder.AddNodeApp("leaderboard-api")
     .WithReference(scoreApi);
-builder.AddGodotApp("godot-snake-client", "..")
+
+builder.AddGodotApp("godot-snake-client")
     .WithReference(scoreApi);
 
 builder.Build().Run();</code></pre>
