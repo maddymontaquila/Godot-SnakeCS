@@ -1,2 +1,11 @@
 # Godot 4+ specific ignores
 .godot/
+
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# JavaScript outputs
+node_modules/

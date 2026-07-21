@@ -3,4 +3,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="apphost.cs" />
+    <Compile Remove="Services\**\*.cs" />
+    <Compile Remove=".godot\**\*.cs" />
+  </ItemGroup>
 </Project>
